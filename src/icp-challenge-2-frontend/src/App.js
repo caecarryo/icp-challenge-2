@@ -3,7 +3,7 @@ import { icp_challenge_2_backend } from 'declarations/icp-challenge-2-backend';
 import logo from './logo2.svg';
 
 class App {
-  greeting = '';
+  dictionaryEntry = '';
 
   constructor() {
     this.#render();
@@ -11,8 +11,8 @@ class App {
 
   #handleSubmit = async (e) => {
     e.preventDefault();
-    const name = document.getElementById('name').value;
-    this.greeting = await icp_challenge_2_backend.greet(name);
+    const word = document.getElementById('word').value;
+    this.dictionaryEntry = await icp_challenge_2_backend.get_dictionary_entry(word);
     this.#render();
   };
 
@@ -23,11 +23,11 @@ class App {
         <br />
         <br />
         <form action="#">
-          <label for="name">Enter your name: &nbsp;</label>
-          <input id="name" alt="Name" type="text" />
-          <button type="submit">Click Me!</button>
+          <label for="word">Enter a word: &nbsp;</label>
+          <input id="word" alt="Word" type="text" />
+          <button type="submit">Look Up!</button>
         </form>
-        <section id="greeting">${this.greeting}</section>
+        <section id="dictionaryEntry">${this.dictionaryEntry}</section>
       </main>
     `;
     render(body, document.getElementById('root'));
